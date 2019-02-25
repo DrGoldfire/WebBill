@@ -6,6 +6,8 @@ LIBS = @LIBS@ @X_LIBS@ @WIDGET_LIBS@ @X_PRE_LIBS@
 INSTALL=@INSTALL@
 INSTALL_DATA=@INSTALL_DATA@
 MKINSTALLDIRS = $(SHELL) $(top_srcdir)/mkinstalldirs
+PROG_SUFFIX = @PROG_SUFFIX@
+SUPPORT_FILES = @SUPPORT_FILES@
 
 X_CFLAGS=@X_CFLAGS@
 GTK_CFLAGS=@GTK_CFLAGS@
@@ -25,7 +27,7 @@ ALL_LDFLAGS =	$(CFLAGS) $(LDFLAGS)
 IMAGE_DEFINES=-DIMAGES=\"${datadir}/xbill\"
 SCORE_DEFINES=-DSCOREFILE=\"${localstatedir}/xbill/scores\"
 
-PROG =	xbill
+PROG =	xbill$(PROG_SUFFIX)
 
 OBJS =	Bill.o Bucket.o Cable.o Computer.o Game.o Horde.o Network.o \
 	OS.o Scorelist.o Spark.o UI.o util.o @WIDGET_OBJS@
@@ -57,9 +59,11 @@ XBMS =	bitmaps/apple.xbm bitmaps/bsd.xbm bitmaps/bucket.xbm \
 MANDIR = man6
 MAN = xbill.6
 
+GENERATED_FILES = @GENERATED_FILES@
+
 all: ${PROG}
 
-xbill: ${OBJS}
+${PROG}: ${OBJS} ${SUPPORT_FILES}
 	$(CC) $(ALL_LDFLAGS) -o $@ ${OBJS} ${LIBS}
 
 .c.o:
@@ -101,5 +105,5 @@ distclean::
 	rm -f config.cache config.h config.log config.status Makefile
 
 distclean clean::
-	rm -f ${PROG} *.o
+	rm -f ${GENERATED_FILES} ${PROG} *.o
 	rm -f *core core*

@@ -18,5 +18,8 @@
 /* Use gtk widgets */
 #undef USE_GTK
 
+/* Build the Wasm version */
+#undef USE_WASM
+
 /* Define if you have the <unistd.h> header file.  */
 #undef HAVE_UNISTD_H

@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <title>XBill</title>
+
+    <link rel="icon" href="xbill.gif" />
+
+    <style>
+      /* Gotta have that GitHub banner. */
+      /* Wouldn't want anybody not taking this thing seriously. */
+      .github_fork_ribbon {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        right: 0;
+        z-index: 9999;
+        text-decoration: none;
+      }
+
+      /* Center the game horizontally, and disable any border or padding to keep
+         mouse event coordinates correct. */
+      body {
+        margin: 20px auto;
+        max-width: 400px;
+      }
+      canvas {
+        padding-right: 0;
+        border: 0px none;
+        display: block;
+      }
+
+      #logo_canvas,
+      #about_canvas {
+        margin-right: auto;
+        margin-left: auto;
+        margin-bottom: 20px;
+      }
+      #button_container {
+        margin-right: auto;
+        margin-left: auto;
+        margin-bottom: 20px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <a href="https://github.com/DrGoldfire/xbill-wasm" class="github_fork_ribbon">
+      <img alt="Fork me on GitHub"
+           src="https://github.blog/wp-content/uploads/2008/12/forkme_right_gray_6d6d6d.png?resize=149%2C149">
+    </a>
+
+    <canvas id="logo_canvas"></canvas>
+
+    <div id="button_container">
+      <button id="btnNewGame">New Game</button>
+      <button id="btnPause">Pause</button>
+      <button id="btnResume" style="display:none">Resume</button>
+      <button id="btnWarp">Warp to Level</button>
+    </div>
+
+    <!-- Use two canvases in order to implement a double buffer; only one is visible at a time. -->
+    <canvas id="canvas0" oncontextmenu="event.preventDefault()"></canvas>
+    <canvas id="canvas1" style="display:none" oncontextmenu="event.preventDefault()"></canvas>
+
+    <h2>The Story</h2>
+    <section id="story"></section>
+    <h2>The Rules</h2>
+    <section id="rules"></section>
+    <h2>About XBill</h2>
+    <section id="about">
+    <a href="http://xbill.org/">XBill</a>
+    is a game by Brian Wellington and Matias Duarte.
+    This WebAssembly port was done by Matt Howell
+    (<a href="https://twitter.com/DrGoldfire">@DrGoldfire on Twitter</a>).
+    The original game and this port are distributed under the terms of the
+    GNU General Public License. The original source distribution is missing
+    any GPL version number, so I've designated this port to be under GPL 2.0.
+    </section>
+
+
+    <script type='text/javascript'>
+      // Set up some globals that library.js will need.
+      // The game's X pixmap format images, parsed into ImageData and mapped by name.
+      let gPixmaps = new Map();
+      let gImages = new Map();
+      // The "active" frame buffer (canvas) is the one we're currently rendering into,
+      // *not* the one that is currently being shown.
+      let gActiveCanvas = 1;
+      // The timer that sets off the game update.
+      let gTimer = null;
+      // The rate of the game update timer (in milliseconds)
+      let gTimerRate = 0;
+
+      // Utility functions for library.js.
+      function active_canvas() {
+        return document.getElementById("canvas" + gActiveCanvas);
+      }
+      function active_context() {
+        return active_canvas().getContext("2d");
+      }
+
+      // Event handlers for the mouse inside the game canvas.
+      document.getElementById("canvas0").onmousedown =
+      document.getElementById("canvas1").onmousedown =
+      function(event) {
+        ccall("Game_button_press", null, [Number, Number], [event.offsetX, event.offsetY]);
+      };
+      document.getElementById("canvas0").onmouseup =
+      document.getElementById("canvas1").onmouseup =
+      function(event) {
+        ccall("Game_button_release", null, [Number, Number], [event.offsetX, event.offsetY]);
+      };
+
+      // Click handlers for our action buttons.
+      document.getElementById("btnNewGame").onclick = function() {
+        ccall("Game_start", null, [Number], [1]);
+      };
+
+      document.getElementById("btnPause").onclick = function() {
+        this.style.display = "none";
+        document.getElementById("btnResume").style.display = "inline";
+        _js_stop_timer();
+      };
+      document.getElementById("btnResume").onclick = function() {
+        this.style.display = "none";
+        document.getElementById("btnPause").style.display = "inline";
+        _js_start_timer(gTimerRate);
+      };
+
+      document.getElementById("btnWarp").onclick = function() {
+        ccall("Game_warp_to_level", null, [Number], [prompt("Warp to level:")]);
+      };
+    </script>
+    <script async type="text/javascript" src="xbill.js"></script>
+  </body>
+</html>

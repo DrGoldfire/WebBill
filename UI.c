@@ -23,6 +23,10 @@
 #include "gtk.h"
 #endif
 
+#if USE_WASM
+#include "wasm.h"
+#endif
+
 static int playing;
 static UI_methods *methods;
 static const char *dialog_strings[DIALOG_MAX + 1];
@@ -66,6 +70,9 @@ typedef struct guimap {
 } guimap;
 
 static guimap guis[] = {
+#ifdef USE_WASM
+	{"wasm", wasm_ui_setmethods},
+#endif
 #ifdef USE_GTK
 	{"gtk", gtk_ui_setmethods},
 #endif

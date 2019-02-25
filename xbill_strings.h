@@ -1,5 +1,5 @@
-#ifndef STRINGS_H
-#define STRINGS_H
+#ifndef XBILL_STRINGS_H
+#define XBILL_STRINGS_H
 
 /*
  * Dialog boxes

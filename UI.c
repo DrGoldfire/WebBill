@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "strings.h"
+#include "xbill_strings.h"
 #include "types.h"
 #include "util.h"
 

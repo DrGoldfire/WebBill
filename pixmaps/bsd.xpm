@@ -32,7 +32,7 @@ static char * bsd_xpm[] = {
 "        ... .....     ..    ",
 "             ..             ",
 "XPMEXT copyright",
-"Copyright © 1988, Marshall Kirk McKusick",
+"Copyright (c) 1988, Marshall Kirk McKusick",
 "All Rights Reserved.  Reproduced with permission.",
 "",
 "XPMENDEXT"};

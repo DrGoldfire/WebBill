@@ -3,7 +3,13 @@
 #include <string.h>
 
 #include "Scorelist.h"
+
+#include "config.h"
 #include "UI.h"
+
+#ifdef USE_WASM
+#include "wasm.h"
+#endif
 
 #define NAMELEN 20
 #define SCORES 10
@@ -16,8 +22,31 @@ typedef struct Score {
 
 static Score scores[SCORES];
 
+static void
+init_empty_scores(void) {
+	for (int i = 0; i < SCORES; i++) {
+		strcpy(scores[i].name, "Anonymous");
+		scores[i].level = 0;
+		scores[i].score = 0;
+	}
+}
+
 void
 Scorelist_read() {
+#ifdef USE_WASM
+	char scoreStr[512] = "";
+	wasm_js_scorelist_read(scoreStr);
+	if (scoreStr[0] != '\0') {
+		char* cursor = scoreStr;
+		for (int i = 0; i < SCORES; i++) {
+			sscanf(cursor, "%20s%d%d\n",
+						 scores[i].name, &scores[i].level, &scores[i].score);
+			cursor = strchr(cursor, '\n') + 1;
+		}
+	} else {
+		init_empty_scores();
+	}
+#else
 	FILE *scorefile = fopen(SCOREFILE, "r");
 	int i;
 
@@ -28,16 +57,23 @@ Scorelist_read() {
 		fclose(scorefile);
 	}
 	else {
-		for (i = 0; i < SCORES; i++) {
-			strcpy(scores[i].name, "Anonymous");
-			scores[i].level = 0;
-			scores[i].score = 0;
-		}
+		init_empty_scores();
 	}
+#endif
 }
 
 void
 Scorelist_write() {
+#ifdef USE_WASM
+	char scoreStr[512] = "";
+	char* cursor = scoreStr;
+	for (int i = 0; i < SCORES; i++) {
+		cursor +=
+			sprintf(cursor, "%-*s %d %d\n", NAMELEN,
+			        scores[i].name, scores[i].level, scores[i].score);
+	}
+	wasm_js_scorelist_write(scoreStr);
+#else
 	FILE *scorefile = fopen(SCOREFILE, "w");
 	int i;
 	if (scorefile == NULL)
@@ -46,6 +82,7 @@ Scorelist_write() {
 		fprintf(scorefile, "%-*s %d %d\n", NAMELEN,
 			scores[i].name, scores[i].level, scores[i].score);
 	fclose(scorefile);
+#endif
 }
 
 /*  Add new high score to list   */

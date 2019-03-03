@@ -177,4 +177,50 @@ mergeInto(LibraryManager.library, {
   js_show_endgame_dialog: function(score, level) {
     alert(`Game over! You got to level ${level} with ${score} points.`);
   },
+
+  js_show_entername_dialog: function() {
+    ccall("Game_add_high_score", null, ["string"],
+      [prompt("You earned a high score. Enter your name:")]);
+  },
+
+  js_update_high_scores: function(scores) {
+    scores = AsciiToString(scores);
+    scores = scores.split(/\n+/).splice(1);
+
+    let tbody = document.createElement("tbody");
+    let tr = document.createElement("tr");
+
+    let headings = scores[0];
+    for (let heading of headings.split(/ +/)) {
+      let th = document.createElement("th");
+      th.innerText = heading;
+      tr.appendChild(th);
+    }
+    tbody.appendChild(tr);
+
+    scores = scores.splice(1);
+    for (let score of scores) {
+      if (score.length) {
+        tr = document.createElement("tr");
+        for (let cell of score.split(/ +/)) {
+          let td = document.createElement("td");
+          td.innerText = cell;
+          tr.appendChild(td);
+        }
+        tbody.appendChild(tr);
+      }
+    }
+
+    document.getElementById("highscores_body").replaceWith(tbody);
+  },
+
+  wasm_js_scorelist_write: function(scorelist) {
+    scorelist = AsciiToString(scorelist);
+    localStorage.setItem("highscores", scorelist);
+  },
+
+  wasm_js_scorelist_read: function(scorelistPtr) {
+    let scores = localStorage.getItem("highscores") || "";
+    writeAsciiToMemory(scores, scorelistPtr);
+  },
 });

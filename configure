@@ -4881,7 +4881,7 @@ fi
 
 if test "$enable_wasm" != "no"; then
 	CFLAGS="$CFLAGS -s WASM=1"
-	LDFLAGS="$LDFLAGS --js-library library.js -s EXPORTED_FUNCTIONS='[\"_main\", \"_Game_start\", \"_Game_warp_to_level\", \"_Game_button_press\", \"_Game_button_release\", \"_Game_update\"]'"
+	LDFLAGS="$LDFLAGS --js-library library.js -s EXPORTED_FUNCTIONS='[\"_main\", \"_Game_add_high_score\", \"_Game_start\", \"_Game_warp_to_level\", \"_Game_button_press\", \"_Game_button_release\", \"_Game_update\"]'"
 	CC=emcc
 
 	$as_echo "#define USE_WASM 1" >>confdefs.h

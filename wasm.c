@@ -5,6 +5,7 @@
 #include "wasm_pixmaps.h"
 
 #include "Game.h"
+#include "Scorelist.h"
 #include "xbill_strings.h"
 
 extern void js_ui_initialize(const char* storyStr, const char* rulesStr, char** logoPixmap);
@@ -29,6 +30,9 @@ extern void js_draw_text(const char* text, int x, int y);
 extern void js_flip_canvas(void);
 
 extern void js_show_endgame_dialog(int score, int level);
+
+extern void js_show_entername_dialog(void);
+extern void js_update_high_scores(const char* scores);
 
 struct Picture {
   const char* name;
@@ -137,6 +141,10 @@ wasm_ui_popup_dialog(int index) {
     case DIALOG_ENDGAME:
       js_show_endgame_dialog(Game_score(), Game_level());
       break;
+    case DIALOG_ENTERNAME:
+      js_show_entername_dialog();
+      Scorelist_write();
+      break;
   }
 }
 
@@ -157,17 +165,23 @@ wasm_ui_make_main_window(int size) {
 
 static void
 wasm_ui_create_dialogs(Picture *logo, Picture *icon, Picture *about) {
-
+  // Our "dialogs" are just HTML, we don't need to create them.
 }
 
 static void
 wasm_ui_set_pausebutton(int active) {
-	
+	// Using this function would cause problems around what to do with the
+  // resume button, since we aren't using a modal dialog to implement pause,
+  // so it's easier to just manage to button states for ourselves.
 }
 
 static void
 wasm_ui_update_dialog(int index, const char *str) {
-
+  switch (index) {
+    case DIALOG_HIGHSCORE:
+      js_update_high_scores(str);
+      break;
+  }
 }
 
 static struct UI_methods wasm_methods = {

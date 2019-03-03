@@ -1,0 +1,8 @@
+*.o
+config.h
+config.log
+config.status
+Makefile
+xbill.js
+xbill.wasm
+xbill.wast

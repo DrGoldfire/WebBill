@@ -179,8 +179,9 @@ mergeInto(LibraryManager.library, {
   },
 
   js_show_entername_dialog: function() {
-    ccall("Game_add_high_score", null, ["string"],
-      [prompt("You earned a high score. Enter your name:")]);
+    let name = prompt("You earned a high score. Enter your name:");
+    name = name.substring(0, 20);
+    ccall("Game_add_high_score", null, ["string"], [name]);
   },
 
   js_update_high_scores: function(scores) {

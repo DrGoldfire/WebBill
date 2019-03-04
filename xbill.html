@@ -18,20 +18,25 @@
         text-decoration: none;
       }
 
-      /* Center the game horizontally, and disable any border or padding to keep
-         mouse event coordinates correct. */
       body {
+        background: #CECECE;
+        font-family: sans-serif;
         margin: 20px auto;
-        max-width: 400px;
+        max-width: 800px;
       }
+      /* There can't be any border or padding on the game canvases,
+         or mouse event coordinates won't be correct. */
       canvas {
-        padding-right: 0;
+        padding: 0;
         border: 0px none;
-        display: block;
+
+        position: relative;
+        top: 25px;
+        left: 8px;
       }
 
-      #logo_canvas,
-      #about_canvas {
+      #header_logo {
+        display: block;
         margin-right: auto;
         margin-left: auto;
         margin-bottom: 20px;
@@ -40,11 +45,21 @@
         margin-right: auto;
         margin-left: auto;
         margin-bottom: 20px;
+        text-align: center;
+      }
+      button {
+        padding: 5px 10px 5px;
+      }
+
+      #canvas_container {
+        margin: auto;
+        background-image: url('xbill_window_frame.png');
+        width: 416px;
+        height: 433px;
       }
 
       h2,
       table caption {
-        font-family: sans-serif;
         font-size: 1.5em;
         font-weight: bold;
         margin-bottom: .5em;
@@ -59,10 +74,10 @@
         table-layout: fixed;
       }
       table tr {
-        border: 1px solid #ddd;
+        border: 1px solid #aaa;
       }
       table th {
-        background-color: #ddd;
+        background-color: #aaa;
       }
       table th,
       table td {
@@ -78,7 +93,7 @@
            src="https://github.blog/wp-content/uploads/2008/12/forkme_right_gray_6d6d6d.png?resize=149%2C149">
     </a>
 
-    <canvas id="logo_canvas"></canvas>
+    <img id="header_logo" src="xbill_header_logo.png" />
 
     <div id="button_container">
       <button id="btnNewGame">New Game</button>
@@ -87,18 +102,62 @@
       <button id="btnWarp">Warp to Level</button>
     </div>
 
-    <!-- Use two canvases in order to implement a double buffer; only one is visible at a time. -->
-    <canvas id="canvas0" oncontextmenu="event.preventDefault()"></canvas>
-    <canvas id="canvas1" style="display:none" oncontextmenu="event.preventDefault()"></canvas>
+    
+    <div id="canvas_container">
+      <!-- Use two canvases in order to implement a double buffer; only one is visible at a time. -->
+      <canvas id="canvas0" oncontextmenu="event.preventDefault()"></canvas>
+      <canvas id="canvas1" style="display:none" oncontextmenu="event.preventDefault()"></canvas>
+    </div>
 
     <table id="highscores">
       <caption>High Scores</caption>
       <tbody id="highscores_body"></tbody>
     </table>
+
     <h2>The Story</h2>
-    <section id="story"></section>
+    <section id="story">
+      Yet again, the fate of the world rests
+      in your hands! An evil computer hacker,
+      known only by his handle 'Bill', has
+      created the ultimate computer virus. A
+      virus so powerful that it has the power
+      to transmute an ordinary computer into
+      a toaster oven. (oooh!) 'Bill' has
+      cloned himself into a billion-jillion
+      micro-Bills. Their sole purpose is to
+      deliver the nefarious virus, which has
+      been cleverly diguised as a popular
+      operating system.
+      <p>
+      As System Administrator/Exterminator,
+      your job is to keep Bill from succeeding
+      at his task.
+    </section>
+
     <h2>The Rules</h2>
-    <section id="rules"></section>
+    <section id="rules">
+      xBill has been painstakingly designed and
+      researched in order to make it as easy to use
+      for the whole family as it is for little Sally.
+      Years - nay - days of beta testing and
+      consulting with the cheapest of human interface
+      designers have resulted in a game that is easy
+      to use, yet nothing at all like a Macintosh.
+
+      <ol>
+        <li>Whack the Bills (click)</li>
+        <li>Restart the computer (click)</li>
+        <li>Pick up stolen OSes & return (drag) them
+            to their respective computers</li>
+        <li>Drag the bucket to extinguish sparks</li>
+        <li>Scoring is based on total uptime, with
+            bonuses for killing Bills.</li>
+      </ol>
+
+      As for the rest, you can probably figure
+      it out.  We did, so it can't be too hard.
+    </section>
+
     <h2>About XBill</h2>
     <section id="about">
     <a href="http://xbill.org/">XBill</a>

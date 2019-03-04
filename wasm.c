@@ -6,9 +6,6 @@
 
 #include "Game.h"
 #include "Scorelist.h"
-#include "xbill_strings.h"
-
-extern void js_ui_initialize(const char* storyStr, const char* rulesStr, char** logoPixmap);
 
 extern void js_start_timer(int ms);
 extern void js_stop_timer(void);
@@ -97,7 +94,7 @@ wasm_ui_draw_image(Picture *pict, int x, int y) {
 
 static void
 wasm_ui_graphics_init(void) {
-  js_ui_initialize(story_dialog_str, rules_dialog_str, logo_xpm);
+  // Nothing to initialize.
 }
 
 static void

@@ -1,22 +1,4 @@
 mergeInto(LibraryManager.library, {
-  js_ui_initialize: function(storyStr, rulesStr, logoPixmap) {
-    storyStr = AsciiToString(storyStr);
-    // The first line of these strings is a header we don't need.
-    storyStr = storyStr.split("\n").splice(2).join(" ");
-    document.getElementById("story").innerText = storyStr;
-
-    rulesStr = AsciiToString(rulesStr);
-    rulesStr = rulesStr.split("\n").splice(2).join("\n");
-    document.getElementById("rules").innerText = rulesStr;
-
-    _js_create_pixmap("logo", logoPixmap);
-    let pixmap = gPixmaps.get("logo");
-    let canvas = document.getElementById("logo_canvas");
-    canvas.width = pixmap.width;
-    canvas.height = pixmap.height;
-    canvas.getContext("2d").putImageData(pixmap, 0, 0);
-  },
-  
   js_start_timer: function(millisecs) {
     gTimerRate = millisecs;
     gTimer = setInterval(cwrap("Game_update", null), millisecs);

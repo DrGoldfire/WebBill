@@ -224,6 +224,10 @@
 
       // Click handlers for our action buttons.
       document.getElementById("btnNewGame").onclick = function() {
+        _js_stop_timer();
+        document.getElementById("btnPause").style.display = "inline";
+        document.getElementById("btnResume").style.display = "none";
+
         ccall("Game_start", null, ["number"], [1]);
       };
 

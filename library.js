@@ -1,7 +1,10 @@
 mergeInto(LibraryManager.library, {
   js_start_timer: function(millisecs) {
-    gTimerRate = millisecs;
-    gTimer = setInterval(cwrap("Game_update", null), millisecs);
+    // Make sure we're not restarting a timer that wasn't actually running.
+    if (millisecs != 0) {
+      gTimerRate = millisecs;
+      gTimer = setInterval(cwrap("Game_update", null), millisecs);
+    }
   },
 
   js_stop_timer: function() {

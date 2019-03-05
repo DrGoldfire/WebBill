@@ -21,50 +21,62 @@
       body {
         background: #CECECE;
         font-family: sans-serif;
-        margin: 20px auto;
+        margin: auto;
         max-width: 800px;
       }
+
       /* There can't be any border or padding on the game canvases,
          or mouse event coordinates won't be correct. */
       canvas {
         padding: 0;
         border: 0px none;
+      }
 
-        position: relative;
-        top: 25px;
-        left: 8px;
+      section {
+        border-image-source: url('xbill_window_frame.png');
+        border-image-slice: 25 45 27 45;
+        border-image-width: 25px 45px 27px 45px;
+        border-image-outset: 25px 8px 8px 8px;
+        border-image-repeat: round stretch;
+
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 50px;
+        margin-bottom: 50px;
       }
 
       #header_logo {
-        display: block;
-        margin-right: auto;
-        margin-left: auto;
-        margin-bottom: 20px;
+        width: 261px;
+        padding: 20px;
       }
+
+      #game_container {
+        width: 400px;
+        background-color: white;
+      }
+
       #button_container {
-        margin-right: auto;
-        margin-left: auto;
-        margin-bottom: 20px;
         text-align: center;
+        padding: 20px;
       }
       button {
         padding: 5px 10px 5px;
-      }
-
-      #canvas_container {
-        margin: auto;
-        background-image: url('xbill_window_frame.png');
-        width: 416px;
-        height: 433px;
       }
 
       h2,
       table caption {
         font-size: 1.5em;
         font-weight: bold;
+        margin-top: .5em;
         margin-bottom: .5em;
-        margin-top: 1em;
         text-align: center;
+      }
+
+      .text-section {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
       }
 
       /* The high scores table */
@@ -93,29 +105,32 @@
            src="https://github.blog/wp-content/uploads/2008/12/forkme_right_gray_6d6d6d.png?resize=149%2C149">
     </a>
 
-    <img id="header_logo" src="xbill_header_logo.png" />
+    <section id="header_logo">
+      <img src="xbill_header_logo.png" />
+    </section>
 
-    <div id="button_container">
-      <button id="btnNewGame">New Game</button>
-      <button id="btnPause">Pause</button>
-      <button id="btnResume" style="display:none">Resume</button>
-      <button id="btnWarp">Warp to Level</button>
-    </div>
-
-    
-    <div id="canvas_container">
+    <section id="game_container">
+      <div id="button_container">
+        <button id="btnNewGame">New Game</button>
+        <button id="btnPause">Pause</button>
+        <button id="btnResume" style="display:none">Resume</button>
+        <button id="btnWarp">Warp to Level</button>
+      </div>
       <!-- Use two canvases in order to implement a double buffer; only one is visible at a time. -->
       <canvas id="canvas0" oncontextmenu="event.preventDefault()"></canvas>
       <canvas id="canvas1" style="display:none" oncontextmenu="event.preventDefault()"></canvas>
-    </div>
+    </section>
 
-    <table id="highscores">
-      <caption>High Scores</caption>
-      <tbody id="highscores_body"></tbody>
-    </table>
+    <section id="highscores" class="text-section">
+      <table id="highscores_table">
+        <caption>High Scores</caption>
+        <tbody id="highscores_body"></tbody>
+      </table>
+    </section>
 
-    <h2>The Story</h2>
-    <section id="story">
+    <section id="story" class="text-section">
+      <h2>The Story</h2>
+      <p>
       Yet again, the fate of the world rests
       in your hands! An evil computer hacker,
       known only by his handle 'Bill', has
@@ -134,8 +149,9 @@
       at his task.
     </section>
 
-    <h2>The Rules</h2>
-    <section id="rules">
+    <section id="rules" class="text-section">
+      <h2>The Rules</h2>
+      <p>
       xBill has been painstakingly designed and
       researched in order to make it as easy to use
       for the whole family as it is for little Sally.
@@ -154,21 +170,22 @@
             bonuses for killing Bills.</li>
       </ol>
 
+      <p>
       As for the rest, you can probably figure
       it out.  We did, so it can't be too hard.
     </section>
 
-    <h2>About XBill</h2>
-    <section id="about">
-    <a href="http://xbill.org/">XBill</a>
-    is a game by Brian Wellington and Matias Duarte.
-    This WebAssembly port was done by Matt Howell
-    (<a href="https://twitter.com/DrGoldfire">@DrGoldfire on Twitter</a>).
-    The original game and this port are distributed under the terms of the
-    GNU General Public License. The original source distribution is missing
-    any GPL version number, so I've designated this port to be under GPL 2.0.
+    <section id="about" class="text-section">
+      <h2>About XBill</h2>
+      <p>
+      <a href="http://xbill.org/">XBill</a>
+      is a game by Brian Wellington and Matias Duarte.
+      This WebAssembly port was done by Matt Howell
+      (<a href="https://twitter.com/DrGoldfire">@DrGoldfire on Twitter</a>).
+      The original game and this port are distributed under the terms of the
+      GNU General Public License. The original source distribution is missing
+      any GPL version number, so I've designated this port to be under GPL 2.0.
     </section>
-
 
     <script type='text/javascript'>
       // Set up some globals that library.js will need.

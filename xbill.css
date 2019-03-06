@@ -1,0 +1,98 @@
+/* Gotta have that GitHub banner. */
+/* Wouldn't want anybody not taking this thing seriously. */
+.github_fork_ribbon {
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  right: 0;
+  z-index: 9999;
+  text-decoration: none;
+}
+
+body {
+  background-image: url('wallpaper.png');
+  font-family: sans-serif;
+  margin: auto;
+  max-width: 800px;
+}
+
+/* There can't be any border or padding on the game canvases,
+    or mouse event coordinates won't be correct. */
+canvas {
+  padding: 0;
+  border: 0px none;
+}
+
+section,
+#abelian-webring-nav {
+  border-image-source: url('xbill_window_frame.png');
+  border-image-slice: 25 45 27 45;
+  border-image-width: 25px 45px 27px 45px;
+  border-image-outset: 25px 8px 8px 8px;
+  border-image-repeat: round stretch;
+
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+
+  background: #CECECE;
+}
+
+#header_logo {
+  width: 261px;
+  padding: 20px;
+}
+
+#game_container {
+  width: 400px;
+  background-color: white;
+}
+
+#button_container {
+  text-align: center;
+  padding: 20px;
+}
+button {
+  padding: 5px 10px 5px;
+}
+
+h2,
+table caption {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-top: .5em;
+  margin-bottom: .5em;
+  text-align: center;
+}
+
+.text-section {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* The high scores table */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed;
+}
+table tr {
+  border: 1px solid #aaa;
+}
+table th {
+  background-color: #aaa;
+}
+table th,
+table td {
+  padding: .625em;
+  text-align: center;
+}
+
+#abelian-webring-nav {
+  width: 800px;
+  height: 50px;
+  padding-bottom: 20px;
+}

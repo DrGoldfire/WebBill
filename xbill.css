@@ -13,18 +13,21 @@ body {
   background-image: url('wallpaper.png');
   font-family: sans-serif;
   margin: auto;
-  max-width: 800px;
+}
+
+#flex_container {
+  display: flex;
+  flex-flow: row wrap;
 }
 
 /* There can't be any border or padding on the game canvases,
     or mouse event coordinates won't be correct. */
-canvas {
+canvas.playfield {
   padding: 0;
   border: 0px none;
 }
 
-section,
-#abelian-webring-nav {
+.content_section {
   border-image-source: url('xbill_window_frame.png');
   border-image-slice: 25 45 27 45;
   border-image-width: 25px 45px 27px 45px;
@@ -37,6 +40,9 @@ section,
   margin-bottom: 50px;
 
   background: #CECECE;
+
+  flex-basis: fit-content;
+  max-width: 500px;
 }
 
 #header_logo {
@@ -54,7 +60,7 @@ section,
   padding: 20px;
 }
 button {
-  padding: 5px 10px 5px;
+  padding: 5px;
 }
 
 h2,
@@ -92,7 +98,7 @@ table td {
 }
 
 #abelian-webring-nav {
-  width: 800px;
-  height: 50px;
+  width: 500px;
+  height: 75px;
   padding-bottom: 20px;
 }

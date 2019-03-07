@@ -18,92 +18,95 @@
            src="https://github.blog/wp-content/uploads/2008/12/forkme_right_gray_6d6d6d.png?resize=149%2C149">
     </a>
 
-    <section id="header_logo">
+    <section id="header_logo" class="content_section">
       <img src="xbill_header_logo.png" />
     </section>
 
-    <section id="game_container">
-      <div id="button_container">
-        <button id="btnNewGame">New Game</button>
-        <button id="btnPause">Pause</button>
-        <button id="btnResume" style="display:none">Resume</button>
-        <button id="btnWarp">Warp to Level</button>
-      </div>
-      <!-- Use two canvases in order to implement a double buffer; only one is visible at a time. -->
-      <canvas id="canvas0" oncontextmenu="event.preventDefault()"></canvas>
-      <canvas id="canvas1" style="display:none" oncontextmenu="event.preventDefault()"></canvas>
+    <section id="flex_container">
+      <section id="game_container" class="content_section">
+        <div id="button_container">
+          <button id="btnNewGame">New Game</button>
+          <button id="btnPause">Pause</button>
+          <button id="btnResume" style="display:none">Resume</button>
+          <button id="btnWarp">Warp to Level</button>
+        </div>
+        <!-- Use two canvases in order to implement a double buffer; only one is visible at a time. -->
+        <canvas id="canvas0" class="playfield" oncontextmenu="event.preventDefault()"></canvas>
+        <canvas id="canvas1" class="playfield" style="display:none" oncontextmenu="event.preventDefault()"></canvas>
+      </section>
+
+      <section id="highscores" class="content_section text-section">
+        <table id="highscores_table">
+          <caption>High Scores</caption>
+          <tbody id="highscores_body"></tbody>
+        </table>
+      </section>
+
+      <section id="rules" class="content_section text-section">
+        <h2>The Rules</h2>
+        <p>
+        xBill has been painstakingly designed and
+        researched in order to make it as easy to use
+        for the whole family as it is for little Sally.
+        Years - nay - days of beta testing and
+        consulting with the cheapest of human interface
+        designers have resulted in a game that is easy
+        to use, yet nothing at all like a Macintosh.
+
+        <ol>
+          <li>Whack the Bills (click)</li>
+          <li>Restart the computer (click)</li>
+          <li>Pick up stolen OSes & return (drag) them
+              to their respective computers</li>
+          <li>Drag the bucket to extinguish sparks</li>
+          <li>Scoring is based on total uptime, with
+              bonuses for killing Bills.</li>
+        </ol>
+
+        <p>
+        As for the rest, you can probably figure
+        it out.  We did, so it can't be too hard.
+      </section>
+
+      <section id="story" class="content_section text-section">
+        <h2>The Story</h2>
+        <p>
+        Yet again, the fate of the world rests
+        in your hands! An evil computer hacker,
+        known only by his handle 'Bill', has
+        created the ultimate computer virus. A
+        virus so powerful that it has the power
+        to transmute an ordinary computer into
+        a toaster oven. (oooh!) 'Bill' has
+        cloned himself into a billion-jillion
+        micro-Bills. Their sole purpose is to
+        deliver the nefarious virus, which has
+        been cleverly diguised as a popular
+        operating system.
+        <p>
+        As System Administrator/Exterminator,
+        your job is to keep Bill from succeeding
+        at his task.
+      </section>
+
+      <section id="about" class="content_section text-section">
+        <h2>About XBill</h2>
+        <p>
+        <a href="http://xbill.org/">XBill</a>
+        is a game by Brian Wellington and Matias Duarte.
+        This WebAssembly port was done by Matt Howell
+        (<a href="https://twitter.com/DrGoldfire">@DrGoldfire on Twitter</a>).
+        The original game and this port are distributed under the terms of the
+        GNU General Public License. The original source distribution is missing
+        any GPL version number, so I've designated this port to be under GPL 2.0.
+      </section>
+
+      <iframe
+        id="abelian-webring-nav"
+        class="content_section"
+        src="https://abelian.now.sh/embed/"
+        frameBorder="no" scrolling="no"
+      />
     </section>
-
-    <section id="highscores" class="text-section">
-      <table id="highscores_table">
-        <caption>High Scores</caption>
-        <tbody id="highscores_body"></tbody>
-      </table>
-    </section>
-
-    <section id="story" class="text-section">
-      <h2>The Story</h2>
-      <p>
-      Yet again, the fate of the world rests
-      in your hands! An evil computer hacker,
-      known only by his handle 'Bill', has
-      created the ultimate computer virus. A
-      virus so powerful that it has the power
-      to transmute an ordinary computer into
-      a toaster oven. (oooh!) 'Bill' has
-      cloned himself into a billion-jillion
-      micro-Bills. Their sole purpose is to
-      deliver the nefarious virus, which has
-      been cleverly diguised as a popular
-      operating system.
-      <p>
-      As System Administrator/Exterminator,
-      your job is to keep Bill from succeeding
-      at his task.
-    </section>
-
-    <section id="rules" class="text-section">
-      <h2>The Rules</h2>
-      <p>
-      xBill has been painstakingly designed and
-      researched in order to make it as easy to use
-      for the whole family as it is for little Sally.
-      Years - nay - days of beta testing and
-      consulting with the cheapest of human interface
-      designers have resulted in a game that is easy
-      to use, yet nothing at all like a Macintosh.
-
-      <ol>
-        <li>Whack the Bills (click)</li>
-        <li>Restart the computer (click)</li>
-        <li>Pick up stolen OSes & return (drag) them
-            to their respective computers</li>
-        <li>Drag the bucket to extinguish sparks</li>
-        <li>Scoring is based on total uptime, with
-            bonuses for killing Bills.</li>
-      </ol>
-
-      <p>
-      As for the rest, you can probably figure
-      it out.  We did, so it can't be too hard.
-    </section>
-
-    <section id="about" class="text-section">
-      <h2>About XBill</h2>
-      <p>
-      <a href="http://xbill.org/">XBill</a>
-      is a game by Brian Wellington and Matias Duarte.
-      This WebAssembly port was done by Matt Howell
-      (<a href="https://twitter.com/DrGoldfire">@DrGoldfire on Twitter</a>).
-      The original game and this port are distributed under the terms of the
-      GNU General Public License. The original source distribution is missing
-      any GPL version number, so I've designated this port to be under GPL 2.0.
-    </section>
-
-    <iframe
-      id="abelian-webring-nav"
-      src="https://abelian.now.sh/embed/"
-      frameBorder="no" scrolling="no"
-    />
   </body>
 </html>

@@ -174,6 +174,7 @@ mergeInto(LibraryManager.library, {
     scores = scores.split(/\n+/).splice(1);
 
     let tbody = document.createElement("tbody");
+    tbody.id = "highscores_body";
     let tr = document.createElement("tr");
 
     let headings = scores[0];

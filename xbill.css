@@ -41,7 +41,6 @@ canvas.playfield {
 
   background: #CECECE;
 
-  flex-basis: fit-content;
   max-width: 500px;
 }
 
